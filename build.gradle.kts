@@ -22,4 +22,7 @@ dependencies {
     testImplementation(libs.kotlin.test.junit)
 
     implementation("io.github.cdimascio:dotenv-kotlin:6.4.1")
+
+    implementation("io.ktor:ktor-server-auth:2.3.12")
+    implementation("io.ktor:ktor-server-auth-jwt:2.3.12")
 }
