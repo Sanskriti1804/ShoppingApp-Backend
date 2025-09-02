@@ -26,6 +26,6 @@ object EnvConfig {
 
 
     //sendgrid
-    val sendgridApiKey : String = dotenv["SENDGRID_APIKEY"]
+    val sendgridApiKey : String = dotenv["SENDGRID_API_KEY"]
         ?: throw  Exception("SENDGRID_APIKEY not found in .env")
 }

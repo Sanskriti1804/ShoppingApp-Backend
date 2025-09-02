@@ -12,8 +12,8 @@ fun Application.configureRouting() {
     routing {
         shiprocketAuthRoutes()
         shiprocketSecureRoutes()
-//        get("/") {
-//            call.respondText("Hello World!")
-//        }
+        get("/") {
+            call.respondText("Hello World!")
+        }
     }
 }
