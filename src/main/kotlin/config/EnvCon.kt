@@ -3,6 +3,7 @@ package com.example.config
 import io.github.cdimascio.dotenv.Dotenv
 
 object EnvConfig {
+    //shiprocket
     private val dotenv : Dotenv = Dotenv.configure().ignoreIfMissing().load()
 
     val shiprocketEmail: String = dotenv["SHIPROCKET_API_EMAIL"]
@@ -23,4 +24,8 @@ object EnvConfig {
     val jwtRealm: String = dotenv["JWT_REALM"]
         ?: "Shopping Backend Authentication"
 
+
+    //sendgrid
+    val sendgridApiKey : String = dotenv["SENDGRID_APIKEY"]
+        ?: throw  Exception("SENDGRID_APIKEY not found in .env")
 }
