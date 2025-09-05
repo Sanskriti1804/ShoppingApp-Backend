@@ -1,24 +1,34 @@
-package com.example.data
+package com.example.config
 
+import com.example.data.schema.Orders
+import com.example.data.schema.Products
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import org.jetbrains.exposed.sql.Database
+import org.jetbrains.exposed.sql.SchemaUtils
+import org.jetbrains.exposed.sql.transactions.transaction
 
 class DatabaseFactory {
 
     private val config = HikariConfig().apply {
-        jdbcUrl = "jdbc:postgresql://localhost:5432/shopping_db"
+        jdbcUrl = System.getenv("DB_URL") ?: "jdbc:postgresql://localhost:5432/shopping_db"
         driverClassName = "org.postgresql.Driver"
-        username = "admin"
-        password = "postgresSecret"
-        isReadOnly = false
+        username = System.getenv("POSTGRES_USER") ?: "admin"
+        password = System.getenv("POSTGRES_PASSWORD") ?: "postgresSecret"
         maximumPoolSize = 7
+        isReadOnly = false
         transactionIsolation = "TRANSACTION_SERIALIZABLE"
     }
 
     private val dataSource = HikariDataSource(config)
 
     val database = Database.connect(dataSource)
+
+    fun init(){
+        transaction(database){
+            SchemaUtils.create(Orders, Products)
+        }
+    }
 
     //MANUAL DB SETUP W/O HIKARI
 //    val database = Database.connect(

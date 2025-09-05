@@ -31,4 +31,8 @@ dependencies {
     implementation("org.jetbrains.exposed:exposed-jdbc:0.41.1")
     implementation("org.postgresql:postgresql:42.6.0") // Postgres driver
     implementation("com.zaxxer:HikariCP:5.0.1")        // Connection pool
+
+    implementation("io.ktor:ktor-client-core:2.3.12")
+    implementation("io.ktor:ktor-client-cio:2.3.12")
+    implementation("io.ktor:ktor-client-content-negotiation:2.3.12")
 }
