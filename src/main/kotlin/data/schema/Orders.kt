@@ -3,7 +3,7 @@ package com.example.data.schema
 import org.jetbrains.exposed.sql.Table
 
 object Orders : Table("orders"){
-    val id = long("id")
+    val id = long("id").autoIncrement()
     val customerName = varchar("customer_name", 100)
     val customerEmail = varchar("customer_email", 100)
     val customerPhone = varchar("customer_phone", 20)
@@ -21,7 +21,7 @@ object Orders : Table("orders"){
 }
 
 object Products : Table("products") {
-    val id = long("id")
+    val id = long("id").autoIncrement()
     val orderId = long("order_id").references(Orders.id)        //foreign key constraint
     val productId = long("product_id")
     val name = varchar("name", 150)

@@ -11,6 +11,10 @@ import io.ktor.server.application.*
 import io.ktor.client.plugins.contentnegotiation.*
 import java.util.*
 import io.ktor.client.engine.cio.*
+import org.jetbrains.exposed.sql.SchemaUtils
+import org.jetbrains.exposed.sql.StdOutSqlLogger
+import org.jetbrains.exposed.sql.addLogger
+import org.jetbrains.exposed.sql.transactions.transaction
 
 
 fun main(args: Array<String>) {     //entry point of app
@@ -23,8 +27,10 @@ fun Application.module() { // main application module - setup code for server wh
     println("JVM TZ = ${java.util.TimeZone.getDefault().id}")
 
     val databaseFactory = DatabaseFactory()
+    databaseFactory.init()
     val orderRepository = OrderRepository(databaseFactory)
 //    databaseFactory.database
+
 
     val httpClient = HttpClient(CIO) {
         install(ContentNegotiation) {
