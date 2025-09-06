@@ -11,6 +11,8 @@ import io.ktor.server.application.*
 import io.ktor.client.plugins.contentnegotiation.*
 import java.util.*
 import io.ktor.client.engine.cio.*
+import io.ktor.http.*
+import io.ktor.server.plugins.cors.routing.*
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.StdOutSqlLogger
 import org.jetbrains.exposed.sql.addLogger
@@ -23,6 +25,16 @@ fun main(args: Array<String>) {     //entry point of app
 }
 
 fun Application.module() { // main application module - setup code for server what
+
+    //allows Android app or frontend call your Ktor backend without getting blocked due to cross-origin restrictions
+    install(CORS) {
+        anyHost()
+        allowHeader(HttpHeaders.ContentType)
+        allowHeader(HttpHeaders.Authorization)
+        allowMethod(HttpMethod.Options)
+        allowMethod(HttpMethod.Get)
+        allowMethod(HttpMethod.Post)
+    }
 
     println("JVM TZ = ${java.util.TimeZone.getDefault().id}")
 

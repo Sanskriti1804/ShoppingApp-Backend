@@ -27,9 +27,13 @@ fun Route.shiprocketAuthRoutes(){
             .withAudience(EnvConfig.jwtAudience)
             .withIssuer(EnvConfig.jwtIssuer)
             .withClaim("email", request.email)
-            .withExpiresAt(Date(System.currentTimeMillis() + 600000))
+            .withExpiresAt(Date(System.currentTimeMillis() + 3600000))
             .sign(Algorithm.HMAC256(EnvConfig.jwtSecret))       //signs jwt claim(email) with choosedn algo(hHMHAC)
 
-        call.respond(mapOf("token" to token))       //to <bearer<token>>
+        call.respond(mapOf(
+            "token" to token,
+            "expiresIn" to 3600,
+            "email" to request.email
+        ))       //to <bearer<token>>
     }
 }

@@ -11,7 +11,7 @@ import io.ktor.server.application.*
 class ShiprocketClient (private val httpClient: HttpClient, private val token: String){
 
     suspend fun getOrderById(orderId : Long): OrderResponse{
-        return httpClient.get("https://apiv2.shiprocket.in/v1/external/orders/show"){
+        return httpClient.get("https://apiv2.shiprocket.in/v1/external/orders/show/$orderId"){
             headers{
 //                append(HttpHeaders.ContentType, contentType(Application.Json.toString()))
                 append(HttpHeaders.Authorization, "Bearer $token")
