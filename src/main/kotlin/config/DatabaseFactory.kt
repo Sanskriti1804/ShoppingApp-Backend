@@ -13,7 +13,8 @@ import org.jetbrains.exposed.sql.transactions.transaction
 class DatabaseFactory {
 
     private val config = HikariConfig().apply {
-        jdbcUrl = System.getenv("DB_URL") ?: "jdbc:postgresql://localhost:5432/shopping_db"
+//        jdbcUrl = System.getenv("DB_URL") ?: "jdbc:postgresql://localhost:5432/shopping_db"
+        jdbcUrl = System.getenv("DB_URL") ?: "jdbc:postgresql://postgres:5432/shopping_db"
         driverClassName = "org.postgresql.Driver"
         username = System.getenv("POSTGRES_USER") ?: "admin"
         password = System.getenv("POSTGRES_PASSWORD") ?: "postgresSecret"
